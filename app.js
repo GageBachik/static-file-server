@@ -8,9 +8,11 @@ app.get('/', function(req, res) {
 });
 
 app.get('/data', function(req, res) {
-	var fileContents = fs.readFileSync('data.txt');
-	res.header('Content-Type', 'text/html');
-	res.send(fileContents);
+	fs.readFile('data.txt', function(err, data){
+		res.header('Content-Type', 'text/html');
+		var fileContents = data;
+		res.send(fileContents);
+	});
 });
 
 var server = app.listen(5445, function() {
