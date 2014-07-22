@@ -3,12 +3,9 @@ var express = require('express');
 var app = express();
 
 
-app.get('/', function(req, res) {
-	res.send('<h1>Hello Boulder</h1>');
-});
-
-app.get('/data', function(req, res) {
-	fs.readFile('data.txt', function(err, data){
+app.get('/:filename', function(req, res) {
+	var file =  'public/' + req.params.filename;
+	fs.readFile(file, function(err, data){
 		res.header('Content-Type', 'text/html');
 		var fileContents = data;
 		res.send(fileContents);
